@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MvpFrame</string>
+    
+    <string name="internet_error">检查是否联网</string>
+
+    <string name="load_error">加载失败</string>
+    <string name="retry_after">请稍后重试</string>
+</resources>
