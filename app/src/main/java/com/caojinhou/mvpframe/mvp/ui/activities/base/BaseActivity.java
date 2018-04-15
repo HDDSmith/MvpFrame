@@ -97,6 +97,17 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
         super.onSaveInstanceState(outState);
     }
 
+    //onDestroy执行比较晚，在stop中释放资源
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(isFinishing()) {
+            MyUtils.cancelSubscription(mSubscription);
+            MyUtils.fixInputMethodManagerLeak(this);
+        }
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -106,8 +117,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
         if (mPresenter != null) {
             mPresenter.onDestroy();
         }
-        MyUtils.cancelSubscription(mSubscription);
-        MyUtils.fixInputMethodManagerLeak(this);
+
     }
 
 
